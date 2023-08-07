@@ -25,7 +25,6 @@ function App() {
 
 export default App;
 
-// import Home from './Api';
 // export const App = () => {
 //   return (
 //     <div
