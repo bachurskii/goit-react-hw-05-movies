@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import './home.module.css';
 
 const API_KEY = '1fe8270af09b2a2e2b930e18d767076b';
 

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
+import styles from './Review.module.css';
 
 const API_KEY = '1fe8270af09b2a2e2b930e18d767076b';
 
@@ -23,16 +24,19 @@ function Review() {
   }, [movieId]);
 
   return (
-    <div>
-      <h2>Reviews</h2>
-      <ul>
-        {reviews.map(review => (
-          <li key={review.id}>
-            <h3>{review.author}</h3>
-            <p>{review.content}</p>
-          </li>
-        ))}
-      </ul>
+    <div className={styles['review-container']}>
+      {reviews.length === 0 ? (
+        <p>Sorry,but we don't have any reviews for this movie.</p>
+      ) : (
+        <ul className={styles['review-list']}>
+          {reviews.map(review => (
+            <li key={review.id} className={styles['review-item']}>
+              <h3 className={styles['author']}>{review.author}</h3>
+              <p className={styles['content']}>{review.content}</p>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
