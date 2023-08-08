@@ -24,15 +24,15 @@ function Review() {
   }, [movieId]);
 
   return (
-    <div className={styles['review-container']}>
+    <div className={styles.review_container}>
       {reviews.length === 0 ? (
         <p>Sorry,but we don't have any reviews for this movie.</p>
       ) : (
-        <ul className={styles['review-list']}>
+        <ul className={styles.review_list}>
           {reviews.map(review => (
-            <li key={review.id} className={styles['review-item']}>
-              <h3 className={styles['author']}>{review.author}</h3>
-              <p className={styles['content']}>{review.content}</p>
+            <li key={review.id} className={styles.review_item}>
+              <h3 className={styles.author}>{review.author}</h3>
+              <p className={styles.content}>{review.content}</p>
             </li>
           ))}
         </ul>

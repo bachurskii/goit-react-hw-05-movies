@@ -39,15 +39,15 @@ function Movies() {
   return (
     <div>
       <SearchBar onSearch={handleSearch} />
-      <div className={styles['movies-container']}>
+      <div className={styles.movies_container}>
         {filteredMovies.map(movie => (
-          <div key={movie.id} className={styles['movie-card']}>
-            <Link to={`/movies/${movie.id}`} className={styles['movie-link']}>
+          <div key={movie.id} className={styles.movie_card}>
+            <Link to={`/movies/${movie.id}`} className={styles.movie_link}>
               <img
                 src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
                 alt={movie.title}
               />
-              <div className={styles['movie-title']}>{movie.title}</div>
+              <div className={styles.movie_title}>{movie.title}</div>
             </Link>
           </div>
         ))}

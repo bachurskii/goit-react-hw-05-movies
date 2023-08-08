@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
 import { useParams } from 'react-router-dom';
 import Cast from 'Cast/Cast';
 import Review from 'Review/Review';
@@ -35,42 +34,37 @@ function MovieDetails() {
 
   return (
     <div>
-      <div className={styles['movie-details']}>
+      <div className={styles.movie_details}>
         <img
           src={`https://image.tmdb.org/t/p/w500/${movieDetails.poster_path}`}
           alt={movieDetails.title}
-          className={styles['movie-details-image']}
+          className={styles.movie_details_image}
         />
-        <div className={styles['movie-details-content']}>
-          <div className={styles['movie-title']}>{movieDetails.title}</div>
-          <div className={styles['movie-info']}>
-            <p className={styles['movie-rating']}>
+        <div className={styles.movie_details_content}>
+          <div className={styles.movie_title}>{movieDetails.title}</div>
+          <div className={styles.movie_info}>
+            <p className={styles.movie_rating}>
               Rating: {movieDetails.vote_average}
             </p>
-            <p className={styles['movie-genre']}>
+            <p className={styles.movie_genre}>
               Genre:{' '}
               {movieDetails.genres &&
                 movieDetails.genres.map(genre => genre.name).join(', ')}
             </p>
           </div>
-          <div className={styles['movie-overview']}>
-            {movieDetails.overview}
-          </div>
+          <div className={styles.movie_overview}>{movieDetails.overview}</div>
         </div>
       </div>
-      <div className={styles['additional-info']}>
+      <div className={styles.additional_info}>
         <h2>Additional information</h2>
         <div>
-          <h3 onClick={toggleCast} className={styles['additional-info-title']}>
+          <h3 onClick={toggleCast} className={styles.additional_info_title}>
             Cast
           </h3>
           {showCast && <Cast movieId={movieId} />}
         </div>
         <div>
-          <h3
-            onClick={toggleReview}
-            className={styles['additional-info-title']}
-          >
+          <h3 onClick={toggleReview} className={styles.additional_info_title}>
             Review
           </h3>
           {showReview && <Review movieId={movieId} />}

@@ -11,13 +11,13 @@ function SearchBar({ onSearch }) {
   };
 
   return (
-    <div className={styles['search-bar']}>
+    <div className={styles.search_bar}>
       <input
         type="text"
         placeholder="Search for a movie..."
         value={searchText}
         onChange={handleSearchChange}
-        className={styles['search-input']}
+        className={styles.search_input}
       />
     </div>
   );

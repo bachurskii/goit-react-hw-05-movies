@@ -9,21 +9,21 @@
   list-style: none;
 }
 
-.cast-item {
+.cast_item {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
   padding-left: 20px;
 }
 
-.actor-image {
+.actor_image {
   width: 200px;
   height: 200px;
 
   margin-right: 10px;
 }
 
-.actor-name {
+.actor_name {
   margin: 0;
   font-weight: bold;
 }

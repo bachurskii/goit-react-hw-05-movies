@@ -1,11 +1,11 @@
-.search-bar {
+.search_bar {
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 20px;
 }
 
-.search-input {
+.search_input {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -16,7 +16,7 @@
   transition: box-shadow 0.3s ease-in-out;
 }
 
-.search-input:focus {
+.search_input:focus {
   outline: none;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }

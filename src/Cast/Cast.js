@@ -31,9 +31,9 @@ function Cast() {
             <img
               src={`https://image.tmdb.org/t/p/w200/${actor.profile_path}`}
               alt={actor.name}
-              className={styles['actor-image']}
+              className={styles.actor_image}
             />
-            <p className={styles['actor-name']}>{actor.name}</p>
+            <p className={styles.actor_name}>{actor.name}</p>
           </li>
         ))}
       </ul>
