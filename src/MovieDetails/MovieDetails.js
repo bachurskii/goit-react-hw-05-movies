@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useParams, Routes, Route } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import styles from './MovieDetails.module.css';
 import Cast from '../Cast/Cast';
@@ -81,5 +82,9 @@ function MovieDetails() {
     </div>
   );
 }
+
+MovieDetails.propTypes = {
+  movieId: PropTypes.string.isRequired,
+};
 
 export default MovieDetails;
