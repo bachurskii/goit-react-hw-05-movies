@@ -7,6 +7,7 @@ const Movies = lazy(() => import('../Movie/Movie'));
 const MovieDetails = lazy(() => import('../MovieDetails/MovieDetails'));
 const Cast = lazy(() => import('../Cast/Cast'));
 const Reviews = lazy(() => import('../Review/Review'));
+const NotFoundPage = lazy(() => import('../NotFoundPage/notFoundPage'));
 
 const App = () => {
   return (
@@ -20,7 +21,7 @@ const App = () => {
               </Link>
             </li>
             <li className={styles.navItem}>
-              <Link to="/Movies" className={styles.navLink}>
+              <Link to="/movies" className={styles.navLink}>
                 Movies
               </Link>
             </li>
@@ -31,9 +32,11 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/movies" element={<Movies />} />
-          <Route path="/movies/:movieId" element={<MovieDetails />} />
-          <Route path="/movies/:movieId/cast" element={<Cast />} />
-          <Route path="/movies/:movieId/reviews" element={<Reviews />} />
+          <Route path="/movies/:movieId" element={<MovieDetails />}>
+            <Route path="/movies/:movieId/cast" element={<Cast />} />
+            <Route path="/movies/:movieId/reviews" element={<Reviews />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Route>
         </Routes>
       </Suspense>
     </div>
@@ -41,18 +44,3 @@ const App = () => {
 };
 
 export default App;
-
-// export const App = () => {
-//   return (
-//     <div
-//       style={{
-//         height: '100vh',
-//         display: 'flex',
-//         justifyContent: 'center',
-//         alignItems: 'center',
-//         fontSize: 40,
-//         color: '#010101',
-//       }}
-//     ></div>
-//   );
-// };

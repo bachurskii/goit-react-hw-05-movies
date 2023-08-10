@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import { Link, useLocation, useParams, Routes, Route } from 'react-router-dom';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
-import Cast from 'Cast/Cast';
-import Review from 'Review/Review';
 import styles from './MovieDetails.module.css';
+import Cast from '../Cast/Cast';
+import Review from '../Review/Review';
 
 const API_KEY = '1fe8270af09b2a2e2b930e18d767076b';
 
 function MovieDetails() {
   const { movieId } = useParams();
+  const location = useLocation();
   const [movieDetails, setMovieDetails] = useState({});
   const [showCast, setShowCast] = useState(false);
   const [showReview, setShowReview] = useState(false);
@@ -35,6 +36,9 @@ function MovieDetails() {
   return (
     <div>
       <div className={styles.movie_details}>
+        <Link to={location.state?.from || '/'} className={styles.goBackLink}>
+          Go back
+        </Link>
         <img
           src={`https://image.tmdb.org/t/p/w500/${movieDetails.poster_path}`}
           alt={movieDetails.title}
@@ -58,19 +62,24 @@ function MovieDetails() {
       <div className={styles.additional_info}>
         <h2>Additional information</h2>
         <div>
-          <h3 onClick={toggleCast} className={styles.additional_info_title}>
+          <Link to={`/movies/${movieId}/cast`} onClick={toggleCast}>
             Cast
-          </h3>
+          </Link>
           {showCast && <Cast movieId={movieId} />}
         </div>
         <div>
-          <h3 onClick={toggleReview} className={styles.additional_info_title}>
-            Review
-          </h3>
+          <Link to={`/movies/${movieId}/reviews`} onClick={toggleReview}>
+            Reviews
+          </Link>
           {showReview && <Review movieId={movieId} />}
         </div>
       </div>
+      <Routes>
+        <Route path="/movies/:movieId/*" element={<Cast />} />
+        <Route path="/movies/:movieId/reviews/*" element={<Review />} />
+      </Routes>
     </div>
   );
 }
+
 export default MovieDetails;
