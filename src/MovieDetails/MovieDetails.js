@@ -14,6 +14,14 @@ function MovieDetails() {
   const [movieDetails, setMovieDetails] = useState({});
   const [showCast, setShowCast] = useState(false);
   const [showReview, setShowReview] = useState(false);
+  const cameBack = location.state?.from ?? '/';
+  const searchParams = new URLSearchParams(location.search);
+  const isCastOpen =
+    searchParams.get('cast') === 'true' ||
+    localStorage.getItem(`cast-${movieId}`) === 'true';
+  const isReviewOpen =
+    searchParams.get('review') === 'true' ||
+    localStorage.getItem(`review-${movieId}`) === 'true';
 
   useEffect(() => {
     axios
@@ -26,18 +34,36 @@ function MovieDetails() {
       });
   }, [movieId]);
 
+  useEffect(() => {
+    setShowCast(isCastOpen);
+    setShowReview(isReviewOpen);
+  }, [isCastOpen, isReviewOpen]);
+
   const toggleCast = () => {
-    setShowCast(!showCast);
+    const newState = !showCast;
+    setShowCast(newState);
+    updateUrlState('cast', newState);
+    localStorage.setItem(`cast-${movieId}`, newState.toString());
   };
 
   const toggleReview = () => {
-    setShowReview(!showReview);
+    const newState = !showReview;
+    setShowReview(newState);
+    updateUrlState('review', newState);
+    localStorage.setItem(`review-${movieId}`, newState.toString());
+  };
+
+  const updateUrlState = (section, isOpen) => {
+    const search = new URLSearchParams(location.search);
+    search.set(section, isOpen ? 'true' : 'false');
+    const newPath = `${location.pathname}?${search.toString()}`;
+    window.history.replaceState(null, '', newPath);
   };
 
   return (
     <div>
       <div className={styles.movie_details}>
-        <Link to={location.state?.from || '/'} className={styles.goBackLink}>
+        <Link to={cameBack} className={styles.goBackLink}>
           Go back
         </Link>
         <img
@@ -63,13 +89,21 @@ function MovieDetails() {
       <div className={styles.additional_info}>
         <h2>Additional information</h2>
         <div>
-          <Link to={`/movies/${movieId}/cast`} onClick={toggleCast}>
+          <Link
+            to={`/movies/${movieId}/cast`}
+            state={{ from: cameBack }}
+            onClick={toggleCast}
+          >
             Cast
           </Link>
           {showCast && <Cast movieId={movieId} />}
         </div>
         <div>
-          <Link to={`/movies/${movieId}/reviews`} onClick={toggleReview}>
+          <Link
+            to={`/movies/${movieId}/reviews`}
+            state={{ from: cameBack }}
+            onClick={toggleReview}
+          >
             Reviews
           </Link>
           {showReview && <Review movieId={movieId} />}

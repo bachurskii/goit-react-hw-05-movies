@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import styles from './Movie.module.css';
 
 const API_KEY = '1fe8270af09b2a2e2b930e18d767076b';
@@ -11,6 +11,7 @@ function Movies() {
   const [movies, setMovies] = useState([]);
   const [searched, setSearched] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
   const handleSearchChange = event => {
     const value = event.target.value;
     setSearchText(value);
@@ -55,7 +56,11 @@ function Movies() {
         <ul className={styles.movie_list}>
           {movies.map(movie => (
             <li key={movie.id} className={styles.movie_item}>
-              <Link to={`/movies/${movie.id}`} className={styles.movie_link}>
+              <Link
+                to={`/movies/${movie.id}`}
+                state={{ from: location }}
+                className={styles.movie_link}
+              >
                 {movie.title}
               </Link>
             </li>
