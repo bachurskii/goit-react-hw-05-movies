@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import styles from './Movie.module.css';
-
-const API_KEY = '1fe8270af09b2a2e2b930e18d767076b';
 
 function Movies() {
   const [searchText, setSearchText] = useState('');
@@ -12,6 +10,31 @@ function Movies() {
   const [searched, setSearched] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+
+  const API_KEY = '1fe8270af09b2a2e2b930e18d767076b';
+
+  useEffect(() => {
+    const queryParam = new URLSearchParams(location.search).get('query');
+    if (queryParam) {
+      setSearchText(queryParam);
+      searchMovies(queryParam);
+    }
+  }, [location.search]);
+
+  const searchMovies = query => {
+    axios
+      .get(
+        `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${query}`
+      )
+      .then(response => {
+        setMovies(response.data.results);
+        setSearched(true);
+      })
+      .catch(error => {
+        console.error('Error searching movies:', error);
+      });
+  };
+
   const handleSearchChange = event => {
     const value = event.target.value;
     setSearchText(value);
@@ -19,20 +42,10 @@ function Movies() {
 
   const handleSearchSubmit = event => {
     event.preventDefault();
-
     if (searchText) {
-      axios
-        .get(
-          `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${searchText}`
-        )
-        .then(response => {
-          setMovies(response.data.results);
-          setSearched(true);
-          navigate(`/movies?query=${searchText}`);
-        })
-        .catch(error => {
-          console.error('Error searching movies:', error);
-        });
+      setSearchText(searchText);
+      searchMovies(searchText);
+      navigate(`/movies?query=${searchText}`);
     }
   };
 
@@ -47,9 +60,7 @@ function Movies() {
           onChange={handleSearchChange}
           className={styles.search_input}
         />
-        <button type="button" onClick={handleSearchSubmit}>
-          Search
-        </button>
+        <button type="submit">Search</button>
       </form>
       {searched && movies.length === 0 && <p>No movies found.</p>}
       {movies.length > 0 && (
