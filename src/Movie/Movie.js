@@ -50,7 +50,7 @@ function Movies() {
   };
 
   return (
-    <div>
+    <div className={styles.movieContainer}>
       <h1 className={styles.title_movies}>Search Movies</h1>
       <form className={styles.form_movies} onSubmit={handleSearchSubmit}>
         <input
@@ -66,7 +66,7 @@ function Movies() {
       {movies.length > 0 && (
         <ul className={styles.movie_list}>
           {movies.map(movie => (
-            <li key={movie.id} className={styles.movie_item}>
+            <li key={movie.id} className={styles.movieItem}>
               <Link
                 to={`/movies/${movie.id}`}
                 state={{ from: location }}

@@ -1,33 +1,23 @@
-.movie_details {
-  display: flex;
-  margin: 20px;
-}
-
-.movie_details_content {
-  flex: 1;
-  padding: 20px;
-}
-
-.movie_details_image {
-  max-width: 300px;
-  margin-right: 20px;
-}
-
-.movie_title {
-  font-size: 24px;
-  font-weight: bold;
-}
-
-.movie_overview {
-  margin-top: 10px;
-}
-
-.additional_info {
+.review_container {
   margin-top: 20px;
-  background-color: _;
+  background-color: #ff5555;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: white;
 }
 
-.additional_info h3 {
-  cursor: pointer;
-  margin-bottom: 10px;
+.review_item {
+  margin-bottom: 20px;
+}
+
+.author {
+  font-weight: bold;
+  color: #aa0c0c;
+}
+
+.content {
+  margin-top: 10px;
+  line-height: 1.5;
+  color: #333;
 }

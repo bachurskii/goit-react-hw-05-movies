@@ -8,11 +8,11 @@ const MovieDetails = lazy(() => import('../MovieDetails/MovieDetails'));
 const Cast = lazy(() => import('../Cast/Cast'));
 const Reviews = lazy(() => import('../Review/Review'));
 const NotFoundPage = lazy(() => import('../NotFoundPage/notFoundPage'));
-
 const App = () => {
   return (
     <div>
       <header className={styles.header}>
+        <h1 className={styles.siteTitle}>Movie Hub</h1>
         <nav>
           <ul className={styles.nav}>
             <li className={styles.navItem}>
